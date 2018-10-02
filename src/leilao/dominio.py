@@ -26,6 +26,14 @@ class Usuario:
         self.nome = nome
         self.carteira = carteira
 
+    def dar_lance(self, leilao: Leilao, valor: float):
+        if valor <= self.carteira:
+            self.carteira -= valor
+            lance = Lance(self, valor)
+            leilao.propoe(lance)
+        else:
+            raise ValueError('nao pode dar um lance com valor maior que a carteira')
+
 
 
 class Lance:
