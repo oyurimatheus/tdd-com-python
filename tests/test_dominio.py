@@ -2,7 +2,7 @@ from unittest import TestCase
 from src.leilao.dominio import Leilao, Usuario, Lance
 
 
-class TestAvaliador(TestCase):
+class TestLeilao(TestCase):
 
     def setUp(self):
         # cria o cenario
