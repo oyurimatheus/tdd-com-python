@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.leilao.dominio import Leilao, Usuario, Lance, Avaliador
+from src.leilao.dominio import Leilao, Usuario, Lance
 
 
 class TestAvaliador(TestCase):
@@ -20,11 +20,8 @@ class TestAvaliador(TestCase):
         self.leilao.propoe(self.lance_do_yuri)
         self.leilao.propoe(self.lance_do_gui)
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        self.assertEqual(avaliador.menor_lance, 100.0)
-        self.assertEqual(avaliador.maior_lance, 200.0)
+        self.assertEqual(self.leilao.menor_lance, 100.0)
+        self.assertEqual(self.leilao.maior_lance, 200.0)
 
     def test_deve_retornar_o_maior_e_o_menor_lance_proposto_em_ordem_decrescente(self):
         # executa
@@ -32,11 +29,8 @@ class TestAvaliador(TestCase):
         self.lance_do_gui = Lance(self.gui, 200.0)
         self.lance_do_yuri = Lance(self.yuri, 100.0)
 
-        self.leilao.propoe(self.lance_do_yuri)
         self.leilao.propoe(self.lance_do_gui)
+        self.leilao.propoe(self.lance_do_yuri)
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        self.assertEqual(avaliador.menor_lance, 100.0)
-        self.assertEqual(avaliador.maior_lance, 200.0)
+        self.assertEqual(self.leilao.menor_lance, 100.0)
+        self.assertEqual(self.leilao.maior_lance, 200.0)
