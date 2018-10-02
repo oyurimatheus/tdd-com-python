@@ -17,8 +17,8 @@ class TestAvaliador(TestCase):
         self.lance_do_gui = Lance(self.gui, 200.0)
         self.lance_do_yuri = Lance(self.yuri, 100.0)
 
-        self.leilao.lances.append(self.lance_do_yuri)
-        self.leilao.lances.append(self.lance_do_gui)
+        self.leilao.propoe(self.lance_do_yuri)
+        self.leilao.propoe(self.lance_do_gui)
 
         avaliador = Avaliador()
         avaliador.avalia(self.leilao)
@@ -32,8 +32,8 @@ class TestAvaliador(TestCase):
         self.lance_do_gui = Lance(self.gui, 200.0)
         self.lance_do_yuri = Lance(self.yuri, 100.0)
 
-        self.leilao.lances.append(self.lance_do_yuri)
-        self.leilao.lances.append(self.lance_do_gui)
+        self.leilao.propoe(self.lance_do_yuri)
+        self.leilao.propoe(self.lance_do_gui)
 
         avaliador = Avaliador()
         avaliador.avalia(self.leilao)

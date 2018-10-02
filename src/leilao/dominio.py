@@ -7,6 +7,9 @@ class Leilao:
         self.descricao = descricao
         self.lances = []
 
+    def propoe(self, lance):
+        self.lances.append(lance)
+
 
 class Usuario:
 
