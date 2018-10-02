@@ -22,8 +22,10 @@ class Leilao:
 
 class Usuario:
 
-    def __init__(self, nome):
+    def __init__(self, nome, carteira=500.0):
         self.nome = nome
+        self.carteira = carteira
+
 
 
 class Lance:

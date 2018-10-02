@@ -59,3 +59,12 @@ class TestLeilao(TestCase):
             self.leilao.propoe(lance_do_gui)
 
             self.assertEqual(len(self.leilao.lances), 1)
+
+
+def test_deve_mostrar_valor_da_carteira_de_um_usuario():
+    yuri = Usuario('Yuri')
+    gui = Usuario('Gui', 1000.0)
+
+    assert yuri.carteira == 500.0
+    assert gui.carteira == 1000.0
+
