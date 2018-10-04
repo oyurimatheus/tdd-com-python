@@ -1,7 +1,7 @@
-from src.leilao.dominio import Leilao, Usuario, Lance, Avaliador
+from src.leilao.dominio import Leilao, Usuario, Lance
 
-gui = Usuario('Gui')
-yuri = Usuario('Yuri')
+gui = Usuario('Gui', 300.0)
+yuri = Usuario('Yuri', 300.0)
 
 leilao_celular = Leilao('Celular')
 
@@ -14,9 +14,3 @@ leilao_celular.lances.append(lance_do_gui)
 for lance in leilao_celular.lances:
     print(f'Lance do usuario {lance.usuario.nome} com o valor de {lance.valor}')
 
-
-avaliador = Avaliador()
-avaliador.avalia(leilao_celular)
-
-print(f'Maior lance: {avaliador.maior_lance}')
-print(f'Menor lance: {avaliador.menor_lance}')

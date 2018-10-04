@@ -1,39 +1,90 @@
-import sys
+class Lance:
+
+    def __init__(self, usuario, valor):
+        self.usuario = usuario
+        self.valor = valor
 
 
 class Leilao:
 
+    ERRO_MESMO_USUARIO = 'O mesmo usuario nao pode dar dois lances seguidos'
+
     def __init__(self, descricao):
         self.descricao = descricao
-        self.lances = []
-        self.maior_lance = sys.float_info.min
-        self.menor_lance = sys.float_info.max
+        self.__lances = []
+        self.__maior_lance = 0
+        self.__menor_lance = 0
 
     def propoe(self, lance):
-        if not self.lances or self.lances[-1].usuario != lance.usuario:
+        if self._lance_eh_valido(lance):
+
+            if not self.lances:
+                self.__menor_lance = lance.valor
             self.lances.append(lance)
-            if lance.valor > self.maior_lance:
-                self.maior_lance = lance.valor
-            if lance.valor < self.menor_lance:
-                self.menor_lance = lance.valor
+
+            self.__maior_lance = lance.valor
         else:
-            raise ValueError('o mesmo usuario nao pode dar dois lances seguidos')
+            raise ValueError(self.ERRO_MESMO_USUARIO)
+
+    def _lance_eh_valido(self, lance):
+        return not self.lances or self.lances[-1].usuario != lance.usuario and self.lances[-1].valor < lance.valor
+
+    @property
+    def lances(self):
+        return self.__lances
+
+    @lances.setter
+    def lances(self, lance: Lance):
+        self.__lances = lance
+
+    @property
+    def maior_lance(self):
+        return self.__maior_lance
+
+    @maior_lance.setter
+    def maior_lance(self, valor: float):
+        self.__maior_lance = valor
+
+    @property
+    def menor_lance(self):
+        return self.__menor_lance
+
+    @menor_lance.setter
+    def menor_lance(self, valor: float):
+        self.__menor_lance = valor
 
 
 class Usuario:
 
-    def __init__(self, nome, carteira=500.0):
-        self.nome = nome
-        self.carteira = carteira
+    ERRO_LANCE_MAIS_ALTO = 'Nao pode dar um lance com valor maior que a carteira'
 
-    def dar_lance(self, leilao: Leilao, valor: float):
+    def __init__(self, nome, carteira):
+        self.__nome = nome
+        self.__carteira = carteira
+
+    def propoe_lance(self, leilao: Leilao, valor: float):
         if valor <= self.carteira:
             self.carteira -= valor
             lance = Lance(self, valor)
             leilao.propoe(lance)
         else:
-            raise ValueError('nao pode dar um lance com valor maior que a carteira')
+            raise ValueError(self.ERRO_LANCE_MAIS_ALTO)
 
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
+
+    @property
+    def carteira(self):
+        return self.__carteira
+
+    @carteira.setter
+    def carteira(self, valor):
+        self.__carteira = valor
 
 
 class Lance:
