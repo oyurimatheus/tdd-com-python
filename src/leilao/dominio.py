@@ -1,3 +1,6 @@
+from src.leilao.excecoes import LanceError
+
+
 class Lance:
 
     def __init__(self, usuario, valor):
@@ -24,18 +27,14 @@ class Leilao:
 
             self.__maior_lance = lance.valor
         else:
-            raise ValueError(self.ERRO_MESMO_USUARIO)
+            raise LanceError(self.ERRO_MESMO_USUARIO)
 
     def _lance_eh_valido(self, lance):
-        return not self.lances or self.lances[-1].usuario != lance.usuario and self.lances[-1].valor < lance.valor
+        return not self._tem_lances() or self._usuarios_diferentes(lance) and self._lance_eh_maior(lance)
 
     @property
     def lances(self):
         return self.__lances
-
-    @lances.setter
-    def lances(self, lance: Lance):
-        self.__lances = lance
 
     @property
     def maior_lance(self):
@@ -52,6 +51,15 @@ class Leilao:
     @menor_lance.setter
     def menor_lance(self, valor: float):
         self.__menor_lance = valor
+
+    def _tem_lances(self):
+        return self.lances
+
+    def _usuarios_diferentes(self, lance):
+        return self.lances[-1].usuario != lance.usuario
+
+    def _lance_eh_maior(self, lance):
+        return self.lances[-1].valor < lance.valor
 
 
 class Usuario:

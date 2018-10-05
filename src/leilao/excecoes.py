@@ -1,0 +1,3 @@
+
+class LanceError(Exception):
+    pass

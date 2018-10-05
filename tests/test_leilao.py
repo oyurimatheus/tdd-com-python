@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from src.leilao.dominio import Leilao, Usuario, Lance
+from src.leilao.excecoes import LanceError
 
 
 class TestLeilao(TestCase):
@@ -51,14 +52,14 @@ class TestLeilao(TestCase):
         self.assertEqual(total_de_lances_devolvido, 2)
 
     def test_deve_lancar_uma_excecao_se_o_ultimo_lance_for_do_mesmo_usuario(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceError):
             lance_do_gui = Lance(self.gui, 200.0)
 
             self.leilao.propoe(lance_do_gui)
             self.leilao.propoe(lance_do_gui)
 
     def test_nao_deve_adicionar_lance_se_o_valor_for_menor_que_o_ultimo_lance(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceError):
             lance_do_yuri = Lance(self.yuri, 300.0)
             lance_do_gui = Lance(self.gui, 200.0)
 
