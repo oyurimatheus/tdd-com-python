@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.leilao.dominio import Usuario, Leilao, Lance, Avaliador
+from src.leilao.dominio import Usuario, Leilao, Lance
 
 
 class TestAvaliador(TestCase):
@@ -22,11 +22,8 @@ class TestAvaliador(TestCase):
         menor_lance_esperado = 100.0
         maior_lance_esperado = 200.0
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        menor_lance_recebido = avaliador.menor_lance
-        maior_lance_recebido = avaliador.maior_lance
+        menor_lance_recebido = self.leilao.menor_lance
+        maior_lance_recebido = self.leilao.maior_lance
 
         self.assertEqual(menor_lance_esperado, menor_lance_recebido)
         self.assertEqual(maior_lance_esperado, maior_lance_recebido)
@@ -43,11 +40,8 @@ class TestAvaliador(TestCase):
         menor_lance_esperado = 100.0
         maior_lance_esperado = 200.0
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        menor_lance_recebido = avaliador.menor_lance
-        maior_lance_recebido = avaliador.maior_lance
+        menor_lance_recebido = self.leilao.menor_lance
+        maior_lance_recebido = self.leilao.maior_lance
 
         self.assertEqual(menor_lance_esperado, menor_lance_recebido)
         self.assertEqual(maior_lance_esperado, maior_lance_recebido)
@@ -60,11 +54,8 @@ class TestAvaliador(TestCase):
         menor_lance_esperado = 100.0
         maior_lance_esperado = 100.0
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        menor_lance_recebido = avaliador.menor_lance
-        maior_lance_recebido = avaliador.maior_lance
+        menor_lance_recebido = self.leilao.menor_lance
+        maior_lance_recebido = self.leilao.maior_lance
 
         self.assertEqual(menor_lance_esperado, menor_lance_recebido)
         self.assertEqual(maior_lance_esperado, maior_lance_recebido)
@@ -83,11 +74,8 @@ class TestAvaliador(TestCase):
         menor_lance_esperado = 100.0
         maior_lance_esperado = 300.0
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        menor_lance_recebido = avaliador.menor_lance
-        maior_lance_recebido = avaliador.maior_lance
+        menor_lance_recebido = self.leilao.menor_lance
+        maior_lance_recebido = self.leilao.maior_lance
 
         self.assertEqual(maior_lance_esperado, maior_lance_recebido)
         self.assertEqual(menor_lance_esperado, menor_lance_recebido)
