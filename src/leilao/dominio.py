@@ -27,12 +27,15 @@ class Leilao:
         self.__lances = []
 
     def propoe(self, lance: Lance):
-        if lance.valor > self.maior_lance:
-            self.maior_lance = lance.valor
-        if lance.valor < self.menor_lance:
-            self.menor_lance = lance.valor
+        if not self.lances or self.lances[-1].usuario != lance.usuario:
+            if lance.valor > self.maior_lance:
+                self.maior_lance = lance.valor
+            if lance.valor < self.menor_lance:
+                self.menor_lance = lance.valor
 
-        self.__lances.append(lance)
+            self.__lances.append(lance)
+        else:
+            raise ValueError('o mesmo usuário não pode dar o mesmo lance')
 
     @property
     def lances(self):

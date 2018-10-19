@@ -79,3 +79,28 @@ class TestAvaliador(TestCase):
 
         self.assertEqual(maior_lance_esperado, maior_lance_recebido)
         self.assertEqual(menor_lance_esperado, menor_lance_recebido)
+
+    def test_deve_permitir_propor_um_novo_lance_quando_o_leilao_nao_tiver_lances(self):
+        lance_do_yuri = Lance(self.yuri, 200.0)
+
+        self.leilao.propoe(lance_do_yuri)
+
+        self.assertEquals(1, len(self.leilao.lances))
+
+    def test_deve_permitir_propor_um_novo_lance_se_o_ultimo_lance_nao_for_do_mesmo_usuario(self):
+        gui = Usuario('Gui')
+
+        lance_do_gui = Lance(gui, 200.0)
+        lance_do_yuri = Lance(self.yuri, 300.0)
+
+        self.leilao.propoe(lance_do_gui)
+        self.leilao.propoe(lance_do_yuri)
+
+        self.assertEqual(2, len(self.leilao.lances))
+
+    def test_nao_deve_adicionar_lance_se_o_ultimo_lance_for_do_mesmo_usuario(self):
+        lance_do_yuri = Lance(self.yuri, 200.0)
+
+        with self.assertRaises(ValueError):
+            self.leilao.propoe(lance_do_yuri)
+            self.leilao.propoe(lance_do_yuri)
