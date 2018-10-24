@@ -44,7 +44,7 @@ class Leilao:
         self.__lances = []
 
     def propoe(self, lance: Lance):
-        if not self.lances or self.lances[-1].usuario != lance.usuario:
+        if self._lance_eh_valido(lance):
             if lance.valor > self.maior_lance:
                 self.maior_lance = lance.valor
             if lance.valor < self.menor_lance:
@@ -57,6 +57,15 @@ class Leilao:
     @property
     def lances(self):
         return self.__lances[:]
+
+    def _lance_eh_valido(self, lance):
+        return not self._tem_lances() or self._diferente_do_ultimo_usuario(lance)
+
+    def _tem_lances(self):
+        return self.lances
+
+    def _diferente_do_ultimo_usuario(self, lance):
+        return self.lances[-1].usuario != lance.usuario
 
 #
 # class Avaliador:
