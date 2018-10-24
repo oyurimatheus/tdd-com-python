@@ -3,7 +3,7 @@ from unittest import TestCase
 from src.leilao.dominio import Usuario, Leilao, Lance
 
 
-class TestAvaliador(TestCase):
+class TestLeilao(TestCase):
 
     def setUp(self):
         self.yuri = Usuario('Yuri')
