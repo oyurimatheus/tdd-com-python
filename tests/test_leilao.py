@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from src.leilao.dominio import Usuario, Leilao, Lance
+from src.leilao.excecoes import LanceInvalidoError
 
 
 class TestLeilao(TestCase):
@@ -101,6 +102,6 @@ class TestLeilao(TestCase):
     def test_nao_deve_adicionar_lance_se_o_ultimo_lance_for_do_mesmo_usuario(self):
         lance_do_yuri = Lance(self.yuri, 200.0)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceInvalidoError):
             self.leilao.propoe(lance_do_yuri)
             self.leilao.propoe(lance_do_yuri)

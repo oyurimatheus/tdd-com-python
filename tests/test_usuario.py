@@ -1,6 +1,8 @@
 from src.leilao.dominio import Usuario, Leilao
 import pytest
 
+from src.leilao.excecoes import LanceInvalidoError
+
 
 @pytest.fixture
 def yuri():
@@ -34,7 +36,7 @@ def test_deve_permitir_lance_de_usuario_com_valor_igual_ao_da_carteira(yuri):
 
 def test_nao_deve_permitir_lance_de_usuario_com_valor_maior_que_o_da_carteira(yuri):
 
-    with pytest.raises(ValueError):
+    with pytest.raises(LanceInvalidoError):
         leilao = Leilao('Celular')
 
         yuri.propoe_lance(leilao, 200.0)

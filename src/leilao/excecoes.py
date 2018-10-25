@@ -1,0 +1,2 @@
+class LanceInvalidoError(Exception):
+    pass
