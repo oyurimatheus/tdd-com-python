@@ -65,13 +65,17 @@ class Leilao:
         return self.__lances[:]
 
     def _lance_eh_valido(self, lance):
-        return not self._tem_lances() or self._diferente_do_ultimo_usuario(lance) # and self._valor_maior_que_anterior(lance)
+        return not self._tem_lances() or (self._diferente_do_ultimo_usuario(lance)
+                                          and self.lance_eh_maior_que_ultimo(lance))
 
     def _tem_lances(self):
         return self.lances
 
     def _diferente_do_ultimo_usuario(self, lance):
         return self.lances[-1].usuario != lance.usuario
+
+    def lance_eh_maior_que_ultimo(self, lance):
+        return lance.valor > self.maior_lance
 
 #
 # class Avaliador:
